@@ -8,7 +8,8 @@ authcode = st.secrets["authcode"]
 st.image("Images/logo.jpeg", width=100)
 
 st.subheader("MPG - Email Helper")
-st.markdown("**Instructions:** Select an email reference from the bank - Provide context (objective) - Set the tone - Generate")
+st.markdown("Generate new email copy using previous reference material.")
+st.markdown("**Instructions:** State an objective (context) - Set the tone - Select a reference - Generate.")
 
 sheet_url = st.secrets["sheet_one_url"] #reference sheet file
 platformlist = ['Adestra','Hubspot','Pardot','Sailthru']
