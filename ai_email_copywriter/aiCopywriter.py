@@ -2,6 +2,15 @@ from openai import OpenAI
 import pandas as pd 
 import streamlit as st
 
+hide_github_style = """
+    <style>
+        [data-testid="stToolbar"] { visibility: hidden; height: 0; position: fixed; }
+    </style>
+"""
+
+st.markdown(hide_github_style, unsafe_allow_html=True)
+#------------------------------------------------------
+
 client = OpenAI(api_key=st.secrets["openai_api_key"])
 authcode = st.secrets["authcode"]
 
