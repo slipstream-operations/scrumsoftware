@@ -11,7 +11,7 @@ hide_github_style = """
 st.markdown(hide_github_style, unsafe_allow_html=True)
 #------------------------------------------------------
 
-client = OpenAI(api_key=st.secrets["openai_api_key"])
+
 authcode = st.secrets["authcode"]
 system_prmt = st.secrets["system_prmt"]
 user_prmt = st.secrets["user_prmt"]
@@ -19,6 +19,9 @@ user_prmt = st.secrets["user_prmt"]
 st.image("Images/logo.jpeg", width=100)
 
 st.subheader("MPG - Encoding Corrector")
+api_key= st.text_input("Org. API Key:")
+#client = OpenAI(api_key=st.secrets["openai_api_key"])
+client = OpenAI(api_key=api_key)
 st.markdown("Automatically detects and corrects encoding errors in a provided list.")
 st.markdown("**Instructions:** Paste a list containing encoding errors below and click **Run**.")
 

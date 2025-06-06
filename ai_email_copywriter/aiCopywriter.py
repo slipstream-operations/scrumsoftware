@@ -15,7 +15,6 @@ client = OpenAI(api_key=st.secrets["openai_api_key"])
 authcode = st.secrets["authcode"]
 
 st.image("Images/logo.jpeg", width=100)
-
 st.subheader("MPG - Email Helper")
 st.markdown("Generate new email copy using previous reference material.")
 st.markdown("**Instructions:** State an objective (context) - Set the tone - Select a reference - Generate.")
