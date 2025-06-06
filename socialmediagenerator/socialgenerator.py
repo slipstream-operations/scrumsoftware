@@ -63,7 +63,8 @@ if st.button("Generate Social Media Campaign"):
         
         time.sleep(0.5)
 
-    st.dataframe(df, height=600, use_container_width=True)
+    #st.dataframe(df, height=600, use_container_width=True)
+    st.write(df)
 
 
 
