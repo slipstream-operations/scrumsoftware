@@ -33,13 +33,14 @@ ad_campaign_template = {
     "ID": [''],
     "Audience segment": [''],
     "Bid Modifier": [''],
-    "Final URL": [''],
+    
     "Final mobile URL": [''],
     "Location": [''],
     "Reach": [''],
     "Radius": [''],
     "Ad type": [''],
     "Ad Name": [''],
+    "Image": [''],
     "Image Size": [''],
     "Display URL": [''],
     "Device Preference": [''],
@@ -54,6 +55,7 @@ ad_campaign_template = {
     "Description 3": [''],
     "Description 4": [''],
     "Description 5": [''],
+    "Final URL": [''],
     "Business name": [''],
     "Call to action": [''],
     "Allow flexible color": [''],
@@ -61,18 +63,29 @@ ad_campaign_template = {
     "Use auto generated video": [''],
     "Ad formats": [''],
     "Campaign Status": [''],
-    "Ad Group Status": ['']
+    "Ad Group Status": [''],
+    "Logo 1":[''],
+    "Logo 2":[''],
+    "Logo 3":[''],
+    "Logo 4":[''],
+    "Logo 5":[''],
+    "Image 1":[''],
+    "Image 2":[''],
+    "Image 3":[''],
+    "Image 4":[''],
+    "Image 5":[''],
+
 }
 
 if "df" not in st.session_state:
     st.session_state.df = pd.DataFrame(ad_campaign_template)
     st.session_state.df=pd.concat([st.session_state.df]*120,ignore_index=True)
-    st.write('Firs time')
+    
 
-if st.button("check sessions"):
+#if st.button("check sessions"):
 
-    if "df" in st.session_state:
-        st.write('df in session state')
+   # if "df" in st.session_state:
+  #      st.write('df in session state')
 
 
 #program code
@@ -96,6 +109,7 @@ if st.button("Add Campaign Data"):
     df = st.session_state.df
 
     df.loc[free_row,'Campaign'] = campaign_name
+    df.loc[free_row,'Campaign Type'] = 'Display'
     df.loc[free_row,'Networks'] = network
     df.loc[free_row,'Bid Strategy Type'] = bid_strategy
     df.loc[free_row,'Start Date'] = start_date
@@ -127,6 +141,7 @@ if st.button('Add Ad Group and Audience Segment'):
     free_row = st.session_state.df[st.session_state.df['Campaign']==''].index[0]
     df = st.session_state.df
     df.loc[free_row,'Campaign'] = selected_campaign
+    
     df.loc[free_row,'Ad Group'] = adgroupname
     df.loc[free_row,'Audience segment'] = audience_segment
     st.write(free_row)
@@ -149,8 +164,8 @@ st.write("")
 st.write("") 
 st.write("Add Responsive Display Ads")
 selected_adgroup = st.selectbox("Adding to which ad group:", adgroup_list)
-responsive_headline1 = st.text_input("Ad Headline 1:", key = 'r1')
-responsive_headline2 = st.text_input("Ad Headline 2:", key ='r2')
+responsive_headline1 = st.text_input("Ad Headline 1:", key="r1")
+responsive_headline2 = st.text_input("Ad Headline 2:", key ="r2")
 responsive_headline3 = st.text_input("Ad Headline 3:", key ='r3')
 responsive_headline4 = st.text_input("Ad Headline 4:", key = 'r4')
 responsive_headline5 = st.text_input("Ad Headline 5:", key ='r5')
@@ -165,7 +180,7 @@ description4 = st.text_input("Desc. 4:", key = 'd4')
 description5 = st.text_input("Desc. 5:", key = 'd5')
 
 
-final_url = st.text_input("Final URL:")
+final_url = st.text_input("Final URL:", key= 'u1')
 cta_selection = st.selectbox("CTA:",cta_options)
 
 
@@ -175,22 +190,43 @@ if st.button("Add Responsive Ad Data"):
     free_row=st.session_state.df[st.session_state.df['Campaign'] == ''].index[0]
     df = st.session_state.df
     df.loc[free_row,'Campaign'] = campaign_name
+    df.loc[free_row,'Ad Group'] = selected_adgroup
     df.loc[free_row,'Ad type'] = ad_type
-    df.loc[free_row,'Headline 1'] = responsive_headline1
+    df.loc[free_row,'Headline 1',] = responsive_headline1
     df.loc[free_row,'Headline 2'] = responsive_headline2
     df.loc[free_row,'Headline 3'] = responsive_headline3
     df.loc[free_row,'Headline 4'] = responsive_headline4
     df.loc[free_row,'Headline 5'] = responsive_headline5
-    df.loc[long_headline,'Long headline'] = long_headline
-    df.loc[long_headline,'Call to Action'] = cta_selection
+    df.loc[free_row,'Long headline'] = long_headline
+    df.loc[free_row,'Call to action'] = cta_selection
 
     df.loc[free_row,'Description 1'] = description1
     df.loc[free_row,'Description 2'] = description2
     df.loc[free_row,'Description 3'] = description3
     df.loc[free_row,'Description 4'] = description4
     df.loc[free_row,'Description 5'] = description5
+    df.loc[free_row,'Logo 1'] = 'images/logo1.jpg'
+    df.loc[free_row,'Image 1'] = 'images/landscape1.jpg'
+    df.loc[free_row,'Final URL'] = final_url
 
     df.loc[free_row,'Ad formats'] = ad_format
+
+def clear_text():
+    st.session_state["r1"] = ""
+    st.session_state["r2"] = ""
+    st.session_state["r3"] = ""
+    st.session_state["r4"] = ""
+    st.session_state["r5"] = ""
+    st.session_state["l1"] = ""
+    st.session_state["d1"] = ""
+    st.session_state["d2"] = ""
+    st.session_state["d3"] = ""
+    st.session_state["d4"] = ""
+    st.session_state["d5"] = ""
+    st.session_state["u1"] = ""
+    
+st.button("Clear Text Input", on_click=clear_text)
+st.write("")
 
 
 if st.button('Test'):
@@ -208,3 +244,5 @@ st.write(st.session_state.df)
 #left 
 #Add description fields for the ads 
 #Add image uploads 
+
+
