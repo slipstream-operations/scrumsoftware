@@ -255,7 +255,11 @@ if st.button('Add Ad Group and Audience Segment'):
 
 #store a list of all current ad groups to a variable 
 filt =  st.session_state.df['Ad Group'] != ''
-adgroup_list = st.session_state.df.loc[filt,'Ad Group'].tolist()
+adgroup_list = list(set(
+    st.session_state.df.loc[filt, 'Ad Group'].tolist()
+))
+
+
 cta_options = ['Learn more','Book now', 'Download']
 
 
@@ -326,6 +330,7 @@ if st.button("Add Responsive Ad Data"):
     df.loc[free_row,'Final URL'] = final_url
 
     df.loc[free_row,'Ad formats'] = ad_format
+    df.loc[free_row,'Business name'] = business_name
     st.success("Ad Data Added")
 
 def clear_text():
