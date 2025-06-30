@@ -115,15 +115,16 @@ network_box_options = ['Dispay Network','None']
 bid_strategy_options = ['Maximize conversions']
 audience_target_options = ['Audience segments']
 
-campaign_name=st.text_input("Enter the campaign name")
-network=st.selectbox("Select Network... *Recommended to use a network for display campaigns*",network_box_options)
-bid_strategy=st.selectbox("Select Bid Strategy", bid_strategy_options)
+campaign_name=st.text_input("Enter the campaign name:")
+network=st.selectbox("Select Network: *Recommended to use a network for display campaigns*",network_box_options)
+bid_strategy=st.selectbox("Select Bid Strategy:", bid_strategy_options)
 audience_targeting_selection = st.selectbox("Audience Targeting Options:",audience_target_options)
 
 start_date=st.date_input("Select Start Date:")
 end_date=st.date_input("Select End Date:")
 
-daily_budget = st.text_input("Enter Daily Budget")
+daily_budget = st.text_input("Enter Daily Budget:")
+exclude_weekends = st.checkbox("Exclude Weekends: *Feature available on next update*")
 
 business_name = st.text_input("Enter Business Name:")
 
@@ -234,7 +235,7 @@ filt=st.session_state.df['Campaign'] != ''
 current_campaigns = list(set(st.session_state.df.loc[filt,'Campaign'].tolist()))
 st.write("**Ad Groups and Custom Audience Segments**")
 
-adgroupname=st.text_input("Ad Group Name")
+adgroupname=st.text_input("Ad Group Name:")
 audience_segment = st.text_input("Custom Audience Segment Name*")
 selected_campaign=st.selectbox("Add to campaign:",current_campaigns)
 
