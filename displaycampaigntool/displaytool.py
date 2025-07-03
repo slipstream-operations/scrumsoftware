@@ -188,7 +188,7 @@ location_list = [
 
 
 
-selected_locations = st.multiselect("Location Targeting * (City targeting included major metropolitan cities only)", location_list)
+selected_locations = st.multiselect("Location Targeting * (City targeting includes major metropolitan cities only)", location_list)
 eu_countries = st.checkbox("Add all EU Countries (*Feature available in next update*)")
 
 if st.button("Add Campaign Data"):
@@ -254,10 +254,17 @@ if st.button('Add Ad Group and Audience Segment'):
 
 
 #store a list of all current ad groups to a variable 
+current_campaigns2 = list(set(
+    st.session_state.df.loc[filt, 'Campaign'].tolist()
+))
 filt =  st.session_state.df['Ad Group'] != ''
+
+
+
 adgroup_list = list(set(
     st.session_state.df.loc[filt, 'Ad Group'].tolist()
 ))
+
 
 
 cta_options = ['Learn more','Book now', 'Download']
@@ -272,6 +279,7 @@ st.write("")
 st.write("")    
 st.write("") 
 st.write("**Add Responsive Display Ads**")
+selected_campaign_ads=st.selectbox("Add ad to campaign:",current_campaigns2)
 selected_adgroup = st.selectbox("Adding to which ad group:", adgroup_list)
 responsive_headline1 = st.text_input("Ad Headline 1:", key="r1")
 charlimit(responsive_headline1,30)
@@ -309,7 +317,7 @@ if st.button("Add Responsive Ad Data"):
     
     free_row=st.session_state.df[st.session_state.df['Campaign'] == ''].index[0]
     df = st.session_state.df
-    df.loc[free_row,'Campaign'] = campaign_name
+    df.loc[free_row,'Campaign'] = selected_campaign_ads
     df.loc[free_row,'Ad Group'] = selected_adgroup
     df.loc[free_row,'Ad type'] = ad_type
     df.loc[free_row,'Headline 1',] = responsive_headline1
