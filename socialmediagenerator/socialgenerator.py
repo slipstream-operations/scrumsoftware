@@ -79,6 +79,7 @@ processed_data = output.getvalue()
         
 
 csv_df = df.to_csv(index=False)
+st.write(df)
 
 st.download_button(
     label="Download Excel",
