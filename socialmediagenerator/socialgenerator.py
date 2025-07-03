@@ -1,10 +1,11 @@
 import pandas as pd 
 import streamlit as st 
 from openai import OpenAI
+from io import BytesIO
 import time
 
 
-authcode = st.secrets["authcode"]
+
 system_prmpt = st.secrets["system_prmt"]
 
 st.write('Social media tool - Testing')
@@ -64,8 +65,27 @@ if st.button("Generate Social Media Campaign"):
         time.sleep(0.5)
 
     #st.dataframe(df, height=600, use_container_width=True)
-    st.write(df)
+        
 
+#convert to excel        
+output = BytesIO()
+with pd.ExcelWriter(output, engine='openpyxl') as writer:
+    df.to_excel(writer, index=False, sheet_name='Sheet1')
+# no writer.save() needed!
+
+processed_data = output.getvalue()
+
+
+        
+
+csv_df = df.to_csv(index=False)
+
+st.download_button(
+    label="Download Excel",
+    data=processed_data,
+    file_name="my_dataframe.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
 
 
 
